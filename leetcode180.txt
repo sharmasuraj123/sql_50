@@ -1,0 +1,8 @@
+SELECT distinct num As ConsecutiveNums from 
+(SELECT
+        id,
+        num,
+        LAG(num, 1) OVER (ORDER BY id) AS prev1,
+        LAG(num, 2) OVER (ORDER BY id) AS prev2
+FROM Logs) As t
+where num = prev1 and num = prev2;
