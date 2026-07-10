@@ -1,0 +1,11 @@
+select person_name
+from
+(
+    select person_name,SUM(weight)
+        OVER (
+        ORDER BY turn
+        ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+        ) As weight_sum
+    from Queue
+) As sub 
+where weight_sum<=1000 order by weight_sum desc limit 1;    
