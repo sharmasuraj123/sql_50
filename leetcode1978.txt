@@ -1,0 +1,1 @@
+select employee_id from Employees where(employee_id) not in(select distinct a.employee_id as employee_id from Employees as a join Employees as b on a.manager_id = b.employee_id) and salary<30000 and manager_id!='null' order by employee_id;
