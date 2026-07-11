@@ -1,0 +1,13 @@
+select id,
+CASE
+        WHEN id % 2 = 1 AND leadone IS NOT NULL THEN leadone
+        WHEN id % 2 = 1 THEN student
+        ELSE lagone
+    END AS student
+from
+(select 
+      id,
+      student,
+      lead(student) over(order by id)  As leadone,
+      lag(student) over(order by id) As lagone
+from Seat) As q;
