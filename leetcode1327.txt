@@ -1,0 +1,7 @@
+select product_name,Sum(t) As unit from 
+(
+    select
+    a.product_id as product_id,a.product_name as product_name,b.order_date as order_date,b.unit as t
+from Products as a join Orders as b on a.product_id = b.product_id where month(b.order_date)=02
+and year(b.order_date)=2020
+) As s group by product_id having unit >=100;  
